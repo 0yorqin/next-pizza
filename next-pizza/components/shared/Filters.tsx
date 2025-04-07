@@ -1,15 +1,19 @@
-import React from "react";
+"use client";
+
 import { Title } from "./Title";
 import { FilterCheckbox } from "./FilterCheckbox";
 import { Input } from "../ui/input";
 import { RangeSlider } from "./RangeSlider";
 import CheckboxFiltersGroup from "./CheckboxFiltersGroup";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 
 type Props = {
   className?: string;
 };
 
 const Filters: React.FC<Props> = ({ className }) => {
+  const { ingredients } = useFilterIngredients();
+
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -49,26 +53,9 @@ const Filters: React.FC<Props> = ({ className }) => {
         title="Ингредиенты"
         className="mt-5"
         limit={6}
-        defaultItems={[
-          { text: "Моцарелла", value: "1" },
-          { text: "Пепперони", value: "2" },
-          { text: "Помидоры", value: "3" },
-          { text: "Сыр", value: "4" },
-          { text: "Колбаски", value: "5" },
-        ]}
-        items={[
-          { text: "Моцарелла", value: "1" },
-          { text: "Пепперони", value: "2" },
-          { text: "Помидоры", value: "3" },
-          { text: "Сыр", value: "4" },
-          { text: "Колбаски", value: "5" },
-          { text: "Моцарелла", value: "1" },
-          { text: "Пепперони", value: "2" },
-          { text: "Помидоры", value: "3" },
-          { text: "Сыр", value: "4" },
-          { text: "Колбаски", value: "5" },
-          { text: "Моцарелла", value: "1" },
-        ]}
+        defaultItems={ingredients.slice(0, 6)}
+        items={ingredients}
+        loading={true}
       />
     </div>
   );
