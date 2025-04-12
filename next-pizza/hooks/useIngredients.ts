@@ -1,21 +1,16 @@
 import { Api } from "@/services/api-client";
 import { useEffect, useState } from "react";
-import { useSet } from "react-use";
 
-interface ReturnProps {
+type ReturnProps = {
   ingredients: { text: string; value: string }[];
   loading: boolean;
-  selectedIds: Set<string>;
-  onAddId: (id: string) => void;
-}
+};
 
-export const useFilterIngredients = (): ReturnProps => {
+export const useIngredients = () => {
   const [ingredients, setIngredients] = useState<ReturnProps["ingredients"]>(
     []
   );
   const [loading, setLoading] = useState(true);
-
-  const [selectedIds, { toggle }] = useSet(new Set<string>([]));
 
   useEffect(() => {
     async function fetchIngredients() {
@@ -38,5 +33,5 @@ export const useFilterIngredients = (): ReturnProps => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, loading, selectedIds, onAddId: toggle };
+  return { ingredients, loading };
 };
