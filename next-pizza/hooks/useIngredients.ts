@@ -2,7 +2,7 @@ import { Api } from "@/services/api-client";
 import { useEffect, useState } from "react";
 
 type ReturnProps = {
-  ingredients: { text: string; value: string }[];
+  ingredients: { name: string; id: string }[];
   loading: boolean;
 };
 
@@ -19,8 +19,8 @@ export const useIngredients = () => {
         const ingredients = await Api.ingredients.getAll();
         setIngredients(
           ingredients.map((ingredient) => ({
-            text: ingredient.name,
-            value: String(ingredient.id),
+            name: ingredient.name,
+            id: String(ingredient.id),
           }))
         );
       } catch (error) {

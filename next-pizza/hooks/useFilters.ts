@@ -61,7 +61,10 @@ export const useFilters = (): ReturnProps => {
   });
 
   const setPriceRange = (name: keyof PriceRange, value: number) => {
-    setPrice({ ...price, [name]: value });
+    setPrice((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return {
